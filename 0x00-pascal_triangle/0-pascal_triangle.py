@@ -1,21 +1,24 @@
 #!/usr/bin/python3
-"""A script to determine Pascal's triangle for any number"""
+"""A script to determine pascal's triangle for any number"""
 
-def calculate_binomial_coefficient(n, k):
-    """Calculates the binomial coefficient (n choose k)"""
-    if k == 0 or k == n:
-        return 1
-    else:
-        return calculate_binomial_coefficient(n - 1, k - 1) + calculate_binomial_coefficient(n - 1, k)
 
 def pascal_triangle(n):
     """
-    Returns a list of lists of integers representing the Pascal’s triangle of n
+    returns a list of lists of integers representing the Pascal’s triangle of n
     """
     triangle = []
 
+    # return (trianlgle if n <= 0)
+    if n <= 0:
+        return triangle
     for i in range(n):
-        row = [calculate_binomial_coefficient(i, j) for j in range(i + 1)]
-        triangle.append(row)
+        temp_list = []
 
+        for j in range(i+1):
+            if j == 0 or j == i:
+                temp_list.append(1)
+            else:
+                temp_list.append(triangle[i-1][j-1] + triangle[i-1][j])
+        triangle.append(temp_list)
+    # print(triangle)
     return triangle
